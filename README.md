@@ -1,51 +1,46 @@
-# 🌊 **Irrigamate – Your Water Predictioner**
+Clone the repository
 
----
-## **Introduction**
-Farmers often rely on guesswork or outdated practices to decide irrigation needs, leading to overwatering, water scarcity, and reduced crop yields — a real-world problem affecting agriculture every day. Irrigamate solves this by providing accurate, real-time water predictions using smart, data-driven insights.
+git clone https://github.com/Vijayashree-tech/AIDC-pro.git
+cd AIDC-pro
 
-## 🌱 **What is Irrigamate?**
 
-**Irrigamate** is your smart partner for water-friendly farming!  
-It’s here to help you decide: **Should I irrigate today?**  
-With real-time inputs, it’s your guide to efficient, sustainable agriculture.
+Install dependencies
 
----
+pip install -r requirements.txt
 
-### 🚀 **Why Use Irrigamate?**
 
-- **Predicts irrigation needs**  
-  _Uses soil, crop, and weather data to make smart decisions!_
-- **Saves water**  
-  _Prevents over-irrigation and reduces wastage._
-- **Instant advice**  
-  _Perfect for quick decisions in rural areas!_
+Run the Streamlit app
 
----
+streamlit run app.py
 
-## 🧰 **Tech Stack – Simple & Powerful!**
 
-- **Streamlit**  
-  _Interactive, friendly web interface – so easy, anyone can use it!_
-- **Flask**  
-  _Handles your input and returns predictions in a flash!_
-- **Scikit-learn**  
-  _Machine learning magic with LinearRegression._
+Open the browser at the URL shown (usually http://localhost:8501
+)
 
----
+⚙️ Backend (Flask API)
 
-## ⚡ **How Does It Work?**
+Clone the repository
 
-1. **You enter your details:**  
-   _Soil type and crop type are selected, while values like temperature, rainfall, humidity, and acreage are set using simple sliders — just a few clicks!_
-2. **Irrigamate’s backend gets to work:**  
-   _Your info zips to the API, where the model predicts your irrigation needs._
-3. **Get your answer instantly:**  
-   _Clear advice: “Irrigate today” or “No need right now”!_
+git clone https://github.com/Kowsalya-S-cse/crop-water-prediction.git
+cd crop-water-prediction
 
----
 
-##  **Conclusion**
-With Irrigamate, smart irrigation is just a click away — saving water, boosting yields, and empowering every farmer with the power of prediction.
+Install dependencies
 
-> 💬 _Water smart, farm smart, with Irrigamate!_
+pip install -r requirements.txt
+
+
+Run the Flask server
+
+python app.py
+
+
+The backend will start on http://127.0.0.1:5000
+
+🌐 Integration Notes
+
+Ensure both frontend and backend are running simultaneously.
+
+The Streamlit frontend communicates with the Flask backend API for predictions.
+
+Update the API endpoint in the frontend code if necessary (e.g., inside app.py → change the URL to match the Flask server address).
