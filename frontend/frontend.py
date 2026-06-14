@@ -18,6 +18,26 @@ st.markdown("""
         .stApp {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
             font-family: 'Inter', sans-serif;
+            color: #f8fafc;
+        }
+        
+        /* Force high contrast for all text */
+        h1, h2, h3, h4, h5, h6, p, label, .stMarkdown, .stText {
+            color: #f8fafc !important;
+        }
+
+        /* Specific targeting for Streamlit Metrics */
+        [data-testid="stMetricLabel"] {
+            color: #f1f5f9 !important;
+            font-size: 1.1rem !important;
+            font-weight: 500 !important;
+        }
+        [data-testid="stMetricValue"] {
+            color: #ffffff !important;
+            font-weight: 700 !important;
+        }
+        [data-testid="stMetricDelta"] {
+            font-weight: 600 !important;
         }
         
         /* Hide Streamlit branding */
@@ -57,14 +77,14 @@ st.markdown("""
         
         .subtitle {
             font-size: 1.3rem;
-            color: #cbd5e1;
+            color: #f1f5f9; /* Brightened from #cbd5e1 */
             font-weight: 400;
             margin-bottom: 10px;
         }
         
         .description {
             font-size: 1rem;
-            color: #94a3b8;
+            color: #e2e8f0; /* Brightened from #94a3b8 */
             max-width: 600px;
             margin: 0 auto;
             line-height: 1.6;
@@ -196,13 +216,14 @@ st.markdown("""
         
         .result-label {
             font-size: 1.2rem;
-            opacity: 0.9;
+            color: #ffffff !important;
             margin-bottom: 10px;
         }
         
         .result-subtitle {
             font-size: 1rem;
-            opacity: 0.8;
+            color: #f1f5f9 !important;
+            opacity: 1;
         }
         
         /* Loading Animation */
@@ -265,13 +286,13 @@ st.markdown("""
         .info-title {
             font-size: 1.1rem;
             font-weight: 600;
-            color: #1e293b;
+            color: #0f172a; /* Darker for white background */
             margin-bottom: 8px;
         }
         
         .info-text {
             font-size: 0.9rem;
-            color: #64748b;
+            color: #334155; /* Darker for white background */
             line-height: 1.5;
         }
         
