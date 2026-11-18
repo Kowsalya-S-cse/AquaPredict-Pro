@@ -481,148 +481,111 @@ with button_col2:
     predict_clicked = st.button("🔮 Calculate Water Requirement", key="predict_btn")
 
 if predict_clicked:
-    url = "http://127.0.0.1:5000/predict"
-    data = {
-        "rainfall": rainfall,
-        "temperature": temperature,
-        "humidity": humidity,
-        "soil_type": soil_type,
-        "crop_type": crop_type,
-        "acres": acres
-    }
+    prediction = None
+    # 1. Attempt Flask REST API (when running locally)
     try:
-        response = requests.post(url, json=data, timeout=10)
-        if response.status_code == 200:
-            result = response.json()
-            prediction = round(result["prediction_lr"], 2)
-            # Adjust prediction based on irrigation efficiency
-            adjusted_prediction = round(prediction * (100 / irrigation_efficiency), 2)
-            water_saved = round(adjusted_prediction - prediction, 2)
-            # Display results
-            st.markdown(f"""
-                <div class="result-card">
-                    <div class="result-label">💧 Recommended Water Requirement</div>
-                    <div class="result-value">{adjusted_prediction:,} L</div>
-                    <div class="result-subtitle">For {acres} acres of {crop_type.title()}</div>
-                </div>
-            """, unsafe_allow_html=True)
-            # Additional insights
-            col1, col2, col3 = st.columns(3)
-            with col1:
-                st.metric(
-                    label="📈 Base Requirement",
-                    value=f"{prediction:,} L",
-                    help="Raw AI prediction"
-                )
-            with col2:
-                st.metric(
-                    label="⚡ Efficiency Adjusted",
-                    value=f"{adjusted_prediction:,} L",
-                    delta=f"+{water_saved} L",
-                    help="Adjusted for irrigation efficiency"
-                )
-            with col3:
-                daily_req = round(adjusted_prediction / 7, 2)  # Assuming weekly requirement
-                st.metric(
-                    label="📅 Daily Average",
-                    value=f"{daily_req:,} L",
-                    help="Estimated daily water need"
-                )
-            # Recommendations
-            st.markdown("### 💡 Smart Recommendations")
-            recommendations = []
-            if humidity < 50:
-                recommendations.append("🌡️ Low humidity detected - consider mulching to reduce water evaporation")
-            if temperature > 35:
-                recommendations.append("🔥 High temperature - increase irrigation frequency during cooler hours")
-            if rainfall > 200:
-                recommendations.append("🌧️ High rainfall expected - reduce irrigation schedule accordingly")
-            if soil_type == "sandy":
-                recommendations.append("🏖️ Sandy soil drains quickly - consider more frequent, smaller irrigations")
-            if irrigation_efficiency < 75:
-                recommendations.append("💦 Consider upgrading to drip irrigation for better water efficiency")
-            if recommendations:
-                for rec in recommendations:
-                    st.info(rec)
-            else:
-                st.success("✅ Your current parameters look optimal for efficient water usage!")
-        else:
-            st.markdown("""
-                <div class="error-card">
-                    ⚠️ <strong>Service Unavailable</strong><br>
-                    Unable to connect to prediction service. Please check if the backend server is running.
-                </div>
-            """, unsafe_allow_html=True)
-    except requests.exceptions.Timeout:
-        st.markdown("""
-            <div class="error-card">
-                ⏰ <strong>Request Timeout</strong><br>
-                The prediction service is taking too long to respond. Please try again.
-            </div>
-        """, unsafe_allow_html=True)
-    except requests.exceptions.ConnectionError:
-        # Smart Direct Inference Fallback when Flask backend is not running on localhost
+        url = "http://127.0.0.1:5000/predict"
+        data = {
+            "rainfall": rainfall,
+            "temperature": temperature,
+            "humidity": humidity,
+            "soil_type": soil_type,
+            "crop_type": crop_type,
+            "acres": acres
+        }
+        resp = requests.post(url, json=data, timeout=1)
+        if resp.status_code == 200:
+            prediction = round(float(resp.json()["prediction_lr"]), 2)
+    except Exception:
+        pass
+
+    # 2. Resilient Cloud Standalone ML Inference (Zero-downtime, exact Linear Regression weights)
+    if prediction is None:
         try:
-            import os, joblib, pandas as pd
-            base_dir = os.path.dirname(os.path.abspath(__file__))
-            m_path = os.path.join(base_dir, '..', 'model-training', 'linear_regression_model.pkl')
-            c_path = os.path.join(base_dir, '..', 'model-training', 'model_columns.pkl')
-            if os.path.exists(m_path) and os.path.exists(c_path):
-                direct_model = joblib.load(m_path)
-                direct_cols = joblib.load(c_path)
-                in_df = pd.DataFrame([data])
-                enc = pd.get_dummies(in_df).reindex(columns=direct_cols, fill_value=0)
-                prediction = round(float(direct_model.predict(enc)[0]), 2)
-                adjusted_prediction = round(prediction * (100 / irrigation_efficiency), 2)
-                water_saved = round(adjusted_prediction - prediction, 2)
-                st.markdown(f"""
-                    <div class="result-card">
-                        <div class="result-label">💧 Recommended Water Requirement</div>
-                        <div class="result-value">{adjusted_prediction:,} L</div>
-                        <div class="result-subtitle">For {acres} acres of {crop_type.title()}</div>
-                    </div>
-                """, unsafe_allow_html=True)
-                col1, col2, col3 = st.columns(3)
-                with col1:
-                    st.metric(label="📈 Base Requirement", value=f"{prediction:,} L", help="Raw AI prediction")
-                with col2:
-                    st.metric(label="⚡ Efficiency Adjusted", value=f"{adjusted_prediction:,} L", delta=f"+{water_saved} L", help="Adjusted for irrigation efficiency")
-                with col3:
-                    daily_req = round(adjusted_prediction / 7, 2)
-                    st.metric(label="📅 Daily Average", value=f"{daily_req:,} L", help="Estimated daily water need")
-                st.markdown("### 💡 Smart Recommendations")
-                recommendations = []
-                if humidity < 50:
-                    recommendations.append("🌡️ Low humidity detected - consider mulching to reduce water evaporation")
-                if temperature > 35:
-                    recommendations.append("🔥 High temperature - increase irrigation frequency during cooler hours")
-                if rainfall > 200:
-                    recommendations.append("🌧️ High rainfall expected - reduce irrigation schedule accordingly")
-                if soil_type == "sandy":
-                    recommendations.append("🏖️ Sandy soil drains quickly - consider more frequent, smaller irrigations")
-                if irrigation_efficiency < 75:
-                    recommendations.append("💦 Consider upgrading to drip irrigation for better water efficiency")
-                if recommendations:
-                    for rec in recommendations:
-                        st.info(rec)
-                else:
-                    st.success("✅ Your current parameters look optimal for efficient water usage!")
-            else:
-                raise FileNotFoundError("Model files not found")
-        except Exception:
-            st.markdown("""
-                <div class="error-card">
-                    🔌 <strong>Connection Error</strong><br>
-                    Cannot connect to the prediction service. Please ensure the backend server is running on localhost:5000.
-                </div>
-            """, unsafe_allow_html=True)
-    except Exception as e:
+            intercept = -17.648457424334026
+            soil_weights = {
+                'clay': 6.988817097155811,
+                'loam': -3.2534055959771884,
+                'sandy': -0.1975460513063442,
+                'silt': -3.5378654498722604
+            }
+            crop_weights = {
+                'cotton': 1.3290760846119056,
+                'maize': 2.456527984485232,
+                'rice': 0.6640677189535459,
+                'sugarcane': -4.605161969112909,
+                'wheat': 0.1554901810622099
+            }
+            calc_val = (
+                intercept +
+                rainfall * 1.0087533956442842 +
+                temperature * 0.5284550081154329 +
+                humidity * -0.011547340859294764 +
+                acres * 100.53297069750464 +
+                soil_weights.get(soil_type.lower(), 0.0) +
+                crop_weights.get(crop_type.lower(), 0.0)
+            )
+            prediction = round(float(calc_val), 2)
+        except Exception as err:
+            st.error(f"Inference computation error: {err}")
+
+    if prediction is not None:
+        # Adjust prediction based on irrigation efficiency
+        adjusted_prediction = round(prediction * (100 / irrigation_efficiency), 2)
+        water_saved = round(adjusted_prediction - prediction, 2)
+        
+        # Display results
         st.markdown(f"""
-            <div class="error-card">
-                🚫 <strong>Unexpected Error</strong><br>
-                {str(e)}
+            <div class="result-card">
+                <div class="result-label">💧 Recommended Water Requirement</div>
+                <div class="result-value">{adjusted_prediction:,} L</div>
+                <div class="result-subtitle">For {acres} acres of {crop_type.title()}</div>
             </div>
         """, unsafe_allow_html=True)
+        
+        # Additional insights
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.metric(
+                label="📈 Base Requirement",
+                value=f"{prediction:,} L",
+                help="Raw AI prediction"
+            )
+        with col2:
+            st.metric(
+                label="⚡ Efficiency Adjusted",
+                value=f"{adjusted_prediction:,} L",
+                delta=f"+{water_saved} L",
+                help="Adjusted for irrigation efficiency"
+            )
+        with col3:
+            daily_req = round(adjusted_prediction / 7, 2)
+            st.metric(
+                label="📅 Daily Average",
+                value=f"{daily_req:,} L",
+                help="Estimated daily water need"
+            )
+            
+        # Recommendations
+        st.markdown("### 💡 Smart Recommendations")
+        recommendations = []
+        if humidity < 50:
+            recommendations.append("🌡️ Low humidity detected - consider mulching to reduce water evaporation")
+        if temperature > 35:
+            recommendations.append("🔥 High temperature - increase irrigation frequency during cooler hours")
+        if rainfall > 200:
+            recommendations.append("🌧️ High rainfall expected - reduce irrigation schedule accordingly")
+        if soil_type == "sandy":
+            recommendations.append("🏖️ Sandy soil drains quickly - consider more frequent, smaller irrigations")
+        if irrigation_efficiency < 75:
+            recommendations.append("💧 Consider upgrading to drip irrigation for better water efficiency")
+            
+        if recommendations:
+            for rec in recommendations:
+                st.info(rec)
+        else:
+            st.success("✅ Your current parameters look optimal for efficient water usage!")
+
 
 # Footer
 st.markdown("""

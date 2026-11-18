@@ -1,14 +1,14 @@
 # 💧 AquaPredict Pro — AI-Based Crop Water Prediction System
 
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)](https://python.org)
-[![Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://aquapredict-pro.streamlit.app)
+[![Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://aquapredict-pro-5qcectvaabfk4gtxkkechr.streamlit.app/)
 [![Flask](https://img.shields.io/badge/Flask-3.0+-000000?logo=flask&logoColor=white)](https://flask.palletsprojects.com)
 [![Scikit-Learn](https://img.shields.io/badge/scikit--learn-1.4+-F7931E?logo=scikit-learn&logoColor=white)](https://scikit-learn.org)
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?logo=github&logoColor=white)](https://github.com/Kowsalya-S-cse/AquaPredict-Pro)
 
 **AquaPredict Pro** is an intelligent precision agriculture system designed to eliminate guesswork in agricultural irrigation. By analyzing key soil, crop, and atmospheric conditions (temperature, humidity, rainfall, soil type, and acreage), it delivers instant, data-driven irrigation predictions and localized conservation recommendations to prevent overwatering and maximize crop yields.
 
-> 🌐 **Live Web Application:** [https://aquapredict-pro.streamlit.app](https://aquapredict-pro.streamlit.app)  
+> 🌐 **Live Web Application:** [https://aquapredict-pro-5qcectvaabfk4gtxkkechr.streamlit.app/](https://aquapredict-pro-5qcectvaabfk4gtxkkechr.streamlit.app/)  
 > 💻 **GitHub Repository:** [https://github.com/Kowsalya-S-cse/AquaPredict-Pro](https://github.com/Kowsalya-S-cse/AquaPredict-Pro)
 
 ---
