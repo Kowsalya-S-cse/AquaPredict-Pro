@@ -18,26 +18,6 @@ st.markdown("""
         .stApp {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
             font-family: 'Inter', sans-serif;
-            color: #f8fafc;
-        }
-        
-        /* Force high contrast for all text */
-        h1, h2, h3, h4, h5, h6, p, label, .stMarkdown, .stText {
-            color: #f8fafc !important;
-        }
-
-        /* Specific targeting for Streamlit Metrics */
-        [data-testid="stMetricLabel"] {
-            color: #f1f5f9 !important;
-            font-size: 1.1rem !important;
-            font-weight: 500 !important;
-        }
-        [data-testid="stMetricValue"] {
-            color: #ffffff !important;
-            font-weight: 700 !important;
-        }
-        [data-testid="stMetricDelta"] {
-            font-weight: 600 !important;
         }
         
         /* Hide Streamlit branding */
@@ -77,14 +57,14 @@ st.markdown("""
         
         .subtitle {
             font-size: 1.3rem;
-            color: #f1f5f9; /* Brightened from #cbd5e1 */
+            color: #cbd5e1;
             font-weight: 400;
             margin-bottom: 10px;
         }
         
         .description {
             font-size: 1rem;
-            color: #e2e8f0; /* Brightened from #94a3b8 */
+            color: #94a3b8;
             max-width: 600px;
             margin: 0 auto;
             line-height: 1.6;
@@ -112,10 +92,46 @@ st.markdown("""
             background: linear-gradient(90deg, #10b981 0%, #3b82f6 50%, #06b6d4 100%);
         }
         
+        /* Headings & Section Titles */
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff !important;
+            font-weight: 600 !important;
+            letter-spacing: -0.01em;
+        }
+
+        /* Parameter Section Subheadings */
+        h4 {
+            color: #38bdf8 !important;
+            font-size: 1.25rem !important;
+            margin-bottom: 5px !important;
+        }
+
+        /* Parameter Widget Labels (Rainfall, Temperature, Crop Type, etc.) */
+        label, [data-testid="stWidgetLabel"], [data-testid="stWidgetLabel"] p, [data-testid="stWidgetLabel"] span {
+            color: #f8fafc !important;
+            font-size: 1.05rem !important;
+            font-weight: 600 !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+        }
+
+        /* Slider Min, Max, and Value Labels */
+        .stSlider [data-testid="stMarkdownContainer"] p,
+        div[data-testid="stTickBar"] div,
+        div[data-testid="stSliderTickBar"] {
+            color: #cbd5e1 !important;
+            font-weight: 500 !important;
+        }
+
+        /* Select Box & Number Input Inner Text */
+        .stSelectbox div, .stSelectbox span, .stNumberInput input {
+            color: #ffffff !important;
+            font-weight: 500 !important;
+        }
+
         .card-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #f1f5f9;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #34d399;
             margin-bottom: 25px;
             display: flex;
             align-items: center;
@@ -216,14 +232,71 @@ st.markdown("""
         
         .result-label {
             font-size: 1.2rem;
-            color: #ffffff !important;
+            opacity: 0.9;
             margin-bottom: 10px;
         }
         
         .result-subtitle {
             font-size: 1rem;
-            color: #f1f5f9 !important;
-            opacity: 1;
+            opacity: 0.8;
+            color: #f1f5f9;
+        }
+
+        /* Streamlit Output Metrics Card & Parameters Styling */
+        div[data-testid="stMetric"] {
+            background: rgba(30, 41, 59, 0.75) !important;
+            border: 1px solid rgba(71, 85, 105, 0.6) !important;
+            padding: 16px 20px !important;
+            border-radius: 16px !important;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        /* Output Metric Headings / Labels (Base Requirement, Efficiency Adjusted, Daily Average) */
+        div[data-testid="stMetricLabel"],
+        div[data-testid="stMetricLabel"] p,
+        div[data-testid="stMetricLabel"] label,
+        div[data-testid="stMetricLabel"] * {
+            color: #38bdf8 !important; /* Bright Electric Cyan */
+            font-size: 1.15rem !important;
+            font-weight: 600 !important;
+        }
+
+        /* Output Metric Numerical Values (e.g. 607.59 L, 759.49 L) */
+        div[data-testid="stMetricValue"],
+        div[data-testid="stMetricValue"] div,
+        div[data-testid="stMetricValue"] * {
+            color: #ffffff !important; /* Bright Crisp White */
+            font-size: 2.1rem !important;
+            font-weight: 700 !important;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.4) !important;
+        }
+
+        /* Delta Values (e.g. +151.9 L) */
+        div[data-testid="stMetricDelta"],
+        div[data-testid="stMetricDelta"] * {
+            font-weight: 600 !important;
+        }
+
+        /* Smart Recommendations Heading */
+        h3 {
+            color: #34d399 !important; /* Bright Emerald */
+            font-size: 1.6rem !important;
+            font-weight: 700 !important;
+            margin-top: 30px !important;
+            margin-bottom: 15px !important;
+        }
+
+        /* Recommendation Alert Boxes */
+        div[data-testid="stAlert"] {
+            background: rgba(15, 23, 42, 0.85) !important;
+            border: 1px solid rgba(56, 189, 248, 0.4) !important;
+            border-radius: 12px !important;
+        }
+
+        div[data-testid="stAlert"] p {
+            color: #f8fafc !important;
+            font-size: 1rem !important;
+            font-weight: 500 !important;
         }
         
         /* Loading Animation */
@@ -286,13 +359,13 @@ st.markdown("""
         .info-title {
             font-size: 1.1rem;
             font-weight: 600;
-            color: #0f172a; /* Darker for white background */
+            color: #1e293b;
             margin-bottom: 8px;
         }
         
         .info-text {
             font-size: 0.9rem;
-            color: #334155; /* Darker for white background */
+            color: #64748b;
             line-height: 1.5;
         }
         
@@ -488,12 +561,61 @@ if predict_clicked:
             </div>
         """, unsafe_allow_html=True)
     except requests.exceptions.ConnectionError:
-        st.markdown("""
-            <div class="error-card">
-                🔌 <strong>Connection Error</strong><br>
-                Cannot connect to the prediction service. Please ensure the backend server is running on localhost:5000.
-            </div>
-        """, unsafe_allow_html=True)
+        # Smart Direct Inference Fallback when Flask backend is not running on localhost
+        try:
+            import os, joblib, pandas as pd
+            base_dir = os.path.dirname(os.path.abspath(__file__))
+            m_path = os.path.join(base_dir, '..', 'model-training', 'linear_regression_model.pkl')
+            c_path = os.path.join(base_dir, '..', 'model-training', 'model_columns.pkl')
+            if os.path.exists(m_path) and os.path.exists(c_path):
+                direct_model = joblib.load(m_path)
+                direct_cols = joblib.load(c_path)
+                in_df = pd.DataFrame([data])
+                enc = pd.get_dummies(in_df).reindex(columns=direct_cols, fill_value=0)
+                prediction = round(float(direct_model.predict(enc)[0]), 2)
+                adjusted_prediction = round(prediction * (100 / irrigation_efficiency), 2)
+                water_saved = round(adjusted_prediction - prediction, 2)
+                st.markdown(f"""
+                    <div class="result-card">
+                        <div class="result-label">💧 Recommended Water Requirement</div>
+                        <div class="result-value">{adjusted_prediction:,} L</div>
+                        <div class="result-subtitle">For {acres} acres of {crop_type.title()}</div>
+                    </div>
+                """, unsafe_allow_html=True)
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    st.metric(label="📈 Base Requirement", value=f"{prediction:,} L", help="Raw AI prediction")
+                with col2:
+                    st.metric(label="⚡ Efficiency Adjusted", value=f"{adjusted_prediction:,} L", delta=f"+{water_saved} L", help="Adjusted for irrigation efficiency")
+                with col3:
+                    daily_req = round(adjusted_prediction / 7, 2)
+                    st.metric(label="📅 Daily Average", value=f"{daily_req:,} L", help="Estimated daily water need")
+                st.markdown("### 💡 Smart Recommendations")
+                recommendations = []
+                if humidity < 50:
+                    recommendations.append("🌡️ Low humidity detected - consider mulching to reduce water evaporation")
+                if temperature > 35:
+                    recommendations.append("🔥 High temperature - increase irrigation frequency during cooler hours")
+                if rainfall > 200:
+                    recommendations.append("🌧️ High rainfall expected - reduce irrigation schedule accordingly")
+                if soil_type == "sandy":
+                    recommendations.append("🏖️ Sandy soil drains quickly - consider more frequent, smaller irrigations")
+                if irrigation_efficiency < 75:
+                    recommendations.append("💦 Consider upgrading to drip irrigation for better water efficiency")
+                if recommendations:
+                    for rec in recommendations:
+                        st.info(rec)
+                else:
+                    st.success("✅ Your current parameters look optimal for efficient water usage!")
+            else:
+                raise FileNotFoundError("Model files not found")
+        except Exception:
+            st.markdown("""
+                <div class="error-card">
+                    🔌 <strong>Connection Error</strong><br>
+                    Cannot connect to the prediction service. Please ensure the backend server is running on localhost:5000.
+                </div>
+            """, unsafe_allow_html=True)
     except Exception as e:
         st.markdown(f"""
             <div class="error-card">
