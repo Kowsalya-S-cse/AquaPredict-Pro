@@ -9,380 +9,223 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Advanced Styling with Modern UI/UX
+# Advanced Styling with Guaranteed High-Contrast Colors
 st.markdown("""
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         
-        /* Global Styles */
-        .stApp {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+        /* Universal Text Contrast Enforcement */
+        * {
             font-family: 'Inter', sans-serif;
+            color-scheme: dark !important;
+        }
+
+        /* Global App Background */
+        .stApp {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%) !important;
         }
         
-        /* Hide Streamlit branding */
+        /* Hide Streamlit default chrome */
         #MainMenu {visibility: hidden;}
         footer {visibility: hidden;}
         header {visibility: hidden;}
         
-        /* Main Container */
-        .main-container {
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 40px;
-            margin: 20px auto;
-            max-width: 1200px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(148, 163, 184, 0.2);
-        }
-        
-        /* Header Section */
-        .hero-section {
-            text-align: center;
-            margin-bottom: 50px;
-            padding: 30px 0;
-        }
-        
-        .main-title {
-            font-size: 3.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #10b981 0%, #3b82f6 50%, #06b6d4 100%);
+        /* Header Hero */
+        .hero-title {
+            font-size: 3.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #10b981 0%, #38bdf8 50%, #06b6d4 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 15px;
+            text-align: center;
+            margin-bottom: 8px;
             letter-spacing: -0.02em;
         }
         
-        .subtitle {
-            font-size: 1.3rem;
-            color: #cbd5e1;
-            font-weight: 400;
-            margin-bottom: 10px;
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #93c5fd !important;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 8px;
         }
         
-        .description {
+        .hero-description {
             font-size: 1rem;
-            color: #94a3b8;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-        
-        /* Card Styles */
-        .input-card {
-            background: rgba(30, 41, 59, 0.6);
-            border-radius: 20px;
-            padding: 35px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(71, 85, 105, 0.5);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .input-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #10b981 0%, #3b82f6 50%, #06b6d4 100%);
-        }
-        
-        /* Headings & Section Titles */
-        h1, h2, h3, h4, h5, h6 {
-            color: #ffffff !important;
-            font-weight: 600 !important;
-            letter-spacing: -0.01em;
-        }
-
-        /* Parameter Section Subheadings */
-        h4 {
-            color: #38bdf8 !important;
-            font-size: 1.25rem !important;
-            margin-bottom: 5px !important;
-        }
-
-        /* Parameter Widget Labels (Rainfall, Temperature, Crop Type, etc.) */
-        label, [data-testid="stWidgetLabel"], [data-testid="stWidgetLabel"] p, [data-testid="stWidgetLabel"] span {
-            color: #f8fafc !important;
-            font-size: 1.05rem !important;
-            font-weight: 600 !important;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.4);
-        }
-
-        /* Slider Min, Max, and Value Labels */
-        .stSlider [data-testid="stMarkdownContainer"] p,
-        div[data-testid="stTickBar"] div,
-        div[data-testid="stSliderTickBar"] {
             color: #cbd5e1 !important;
-            font-weight: 500 !important;
+            max-width: 650px;
+            margin: 0 auto 35px auto;
+            line-height: 1.6;
+            text-align: center;
         }
-
-        /* Select Box & Number Input Inner Text */
-        .stSelectbox div, .stSelectbox span, .stNumberInput input {
-            color: #ffffff !important;
-            font-weight: 500 !important;
-        }
-
-        .card-title {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: #34d399;
-            margin-bottom: 25px;
+        
+        /* Section Headlines */
+        .card-heading {
+            font-size: 1.6rem !important;
+            font-weight: 700 !important;
+            color: #34d399 !important; /* Emerald Green */
+            margin: 15px 0 20px 0 !important;
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        
-        /* Form Styling */
-        .stSelectbox > div > div {
-            background-color: rgba(51, 65, 85, 0.8);
-            border: 2px solid rgba(71, 85, 105, 0.6);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            color: #f1f5f9;
+
+        .column-heading {
+            font-size: 1.25rem !important;
+            font-weight: 700 !important;
+            color: #38bdf8 !important; /* Electric Cyan */
+            margin: 10px 0 4px 0 !important;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
         }
-        
-        .stSelectbox > div > div:focus-within {
-            border-color: #10b981;
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+
+        .column-subtext {
+            color: #cbd5e1 !important;
+            font-size: 0.9rem !important;
+            margin-bottom: 18px !important;
         }
-        
-        .stSlider > div > div > div {
-            background: linear-gradient(90deg, #10b981 0%, #06b6d4 100%);
+
+        /* Widget Labels (Rainfall, Crop Type, Acres, etc.) */
+        label, 
+        .stWidgetLabel, 
+        [data-testid="stWidgetLabel"],
+        [data-testid="stWidgetLabel"] *,
+        [data-testid="stMarkdownContainer"] p {
+            color: #ffffff !important;
+            font-size: 1.05rem !important;
+            font-weight: 600 !important;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.4);
         }
-        
+
+        /* Slider Value Displays & Tick Bars */
+        div[data-testid="stTickBar"] div,
+        div[data-testid="stSliderTickBar"] div,
+        [data-testid="stThumbValue"] {
+            color: #38bdf8 !important;
+            font-weight: 600 !important;
+        }
+
+        /* Form Inputs (Selectbox & NumberInput) */
+        .stSelectbox > div > div, 
         .stNumberInput > div > div {
-            background-color: rgba(51, 65, 85, 0.8);
-            border: 2px solid rgba(71, 85, 105, 0.6);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            color: #f1f5f9;
+            background-color: rgba(30, 41, 59, 0.9) !important;
+            border: 2px solid rgba(71, 85, 105, 0.7) !important;
+            border-radius: 12px !important;
+            color: #ffffff !important;
         }
-        
-        .stNumberInput > div > div:focus-within {
-            border-color: #10b981;
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+
+        div[data-baseweb="select"] *, 
+        div[data-baseweb="input"] *,
+        input {
+            color: #ffffff !important;
+            background-color: transparent !important;
+            font-weight: 500 !important;
         }
-        
-        /* Button Styling */
-        .predict-button {
-            display: flex;
-            justify-content: center;
-            margin: 40px 0;
+
+        ul[data-baseweb="menu"] {
+            background-color: #1e293b !important;
         }
-        
+
+        ul[data-baseweb="menu"] * {
+            color: #ffffff !important;
+        }
+
+        /* Submit Button */
         .stButton > button {
-            background: linear-gradient(135deg, #10b981 0%, #3b82f6 50%, #06b6d4 100%);
-            color: white;
-            font-weight: 600;
-            font-size: 1.1rem;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.4);
-            transition: all 0.3s ease;
-            min-width: 250px;
+            background: linear-gradient(135deg, #10b981 0%, #3b82f6 50%, #06b6d4 100%) !important;
+            color: #ffffff !important;
+            font-weight: 700 !important;
+            font-size: 1.15rem !important;
+            padding: 16px 45px !important;
+            border: none !important;
+            border-radius: 16px !important;
+            box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.5) !important;
+            transition: all 0.3s ease !important;
+            width: 100% !important;
+            margin-top: 25px !important;
         }
         
         .stButton > button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 35px -5px rgba(16, 185, 129, 0.6);
+            transform: translateY(-2px) !important;
+            box-shadow: 0 15px 35px -5px rgba(16, 185, 129, 0.7) !important;
         }
         
-        /* Result Card */
+        /* Result Highlights */
         .result-card {
-            background: linear-gradient(135deg, #10b981 0%, #3b82f6 50%, #06b6d4 100%);
-            color: white;
-            padding: 35px;
-            border-radius: 20px;
-            text-align: center;
-            margin: 30px 0;
-            box-shadow: 0 15px 35px -5px rgba(16, 185, 129, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .result-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: shimmer 3s ease-in-out infinite;
-        }
-        
-        @keyframes shimmer {
-            0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(180deg); }
-        }
-        
-        .result-value {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin: 15px 0;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            background: linear-gradient(135deg, #059669 0%, #2563eb 60%, #0284c7 100%) !important;
+            color: #ffffff !important;
+            padding: 35px !important;
+            border-radius: 20px !important;
+            text-align: center !important;
+            margin: 30px 0 25px 0 !important;
+            box-shadow: 0 15px 35px -5px rgba(16, 185, 129, 0.4) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
         }
         
         .result-label {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 10px;
+            font-size: 1.3rem !important;
+            font-weight: 600 !important;
+            color: #e0f2fe !important;
+            margin-bottom: 8px !important;
+        }
+
+        .result-value {
+            font-size: 2.8rem !important;
+            font-weight: 800 !important;
+            color: #ffffff !important;
+            margin: 12px 0 !important;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3) !important;
         }
         
         .result-subtitle {
-            font-size: 1rem;
-            opacity: 0.8;
-            color: #f1f5f9;
+            font-size: 1.05rem !important;
+            color: #f1f5f9 !important;
         }
 
-        /* Streamlit Output Metrics Card & Parameters Styling */
+        /* Streamlit Output Metrics Card */
         div[data-testid="stMetric"] {
-            background: rgba(30, 41, 59, 0.75) !important;
-            border: 1px solid rgba(71, 85, 105, 0.6) !important;
-            padding: 16px 20px !important;
+            background: rgba(30, 41, 59, 0.85) !important;
+            border: 1px solid rgba(71, 85, 105, 0.7) !important;
+            padding: 18px 22px !important;
             border-radius: 16px !important;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important;
         }
 
-        /* Output Metric Headings / Labels (Base Requirement, Efficiency Adjusted, Daily Average) */
         div[data-testid="stMetricLabel"],
-        div[data-testid="stMetricLabel"] p,
-        div[data-testid="stMetricLabel"] label,
         div[data-testid="stMetricLabel"] * {
-            color: #38bdf8 !important; /* Bright Electric Cyan */
+            color: #38bdf8 !important; /* Electric Cyan */
             font-size: 1.15rem !important;
             font-weight: 600 !important;
         }
 
-        /* Output Metric Numerical Values (e.g. 607.59 L, 759.49 L) */
         div[data-testid="stMetricValue"],
-        div[data-testid="stMetricValue"] div,
         div[data-testid="stMetricValue"] * {
-            color: #ffffff !important; /* Bright Crisp White */
-            font-size: 2.1rem !important;
-            font-weight: 700 !important;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.4) !important;
+            color: #ffffff !important; /* Bright White */
+            font-size: 2.2rem !important;
+            font-weight: 800 !important;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.4) !important;
         }
 
-        /* Delta Values (e.g. +151.9 L) */
-        div[data-testid="stMetricDelta"],
-        div[data-testid="stMetricDelta"] * {
-            font-weight: 600 !important;
-        }
-
-        /* Smart Recommendations Heading */
-        h3 {
-            color: #34d399 !important; /* Bright Emerald */
+        /* Recommendation Section Title */
+        .rec-heading {
+            color: #34d399 !important; /* Emerald */
             font-size: 1.6rem !important;
             font-weight: 700 !important;
-            margin-top: 30px !important;
-            margin-bottom: 15px !important;
+            margin: 35px 0 15px 0 !important;
         }
 
         /* Recommendation Alert Boxes */
         div[data-testid="stAlert"] {
-            background: rgba(15, 23, 42, 0.85) !important;
+            background: rgba(15, 23, 42, 0.9) !important;
             border: 1px solid rgba(56, 189, 248, 0.4) !important;
-            border-radius: 12px !important;
+            border-radius: 14px !important;
+            margin-bottom: 12px !important;
         }
 
         div[data-testid="stAlert"] p {
             color: #f8fafc !important;
-            font-size: 1rem !important;
+            font-size: 1.02rem !important;
             font-weight: 500 !important;
-        }
-        
-        /* Loading Animation */
-        .loading {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-        }
-        
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(71, 85, 105, 0.3);
-            border-top: 5px solid #10b981;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* Error Styling */
-        .error-card {
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            margin: 20px 0;
-            box-shadow: 0 10px 25px -5px rgba(239, 68, 68, 0.4);
-        }
-        
-        /* Info Cards */
-        .info-grid {
-            display: none;
-        }
-        
-        .info-card {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.1);
-            border: 1px solid #e2e8f0;
-            transition: transform 0.3s ease;
-        }
-        
-        .info-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .info-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-        
-        .info-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 8px;
-        }
-        
-        .info-text {
-            font-size: 0.9rem;
-            color: #64748b;
-            line-height: 1.5;
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .main-title {
-                font-size: 2.5rem;
-            }
-            
-            .main-container {
-                margin: 10px;
-                padding: 25px;
-            }
-            
-            .input-card {
-                padding: 25px;
-            }
         }
     </style>
 """, unsafe_allow_html=True)
@@ -390,46 +233,45 @@ st.markdown("""
 
 # Hero Section
 st.markdown("""
-    <div class="hero-section">
-        <div class="main-title">🌾 AquaPredict Pro</div>
-        <div class="subtitle">AI-Powered Water Management for Smart Agriculture</div>
-        <div class="description">
+    <div style="text-align: center; padding: 25px 0 10px 0;">
+        <div class="hero-title">🌾 AquaPredict Pro</div>
+        <div class="hero-subtitle">AI-Powered Water Management for Smart Agriculture</div>
+        <div class="hero-description">
             Optimize your irrigation with precision agriculture technology. 
             Get accurate water requirement predictions based on real-time environmental data.
         </div>
     </div>
 """, unsafe_allow_html=True)
 
+# Main Section Card
+st.markdown('<div class="card-heading">📊 Field Parameters</div>', unsafe_allow_html=True)
 
-st.markdown('<div class="card-title">📊 Field Parameters</div>', unsafe_allow_html=True)
-
-# Create three columns for better layout
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    st.markdown("#### 🌤️ Weather Conditions")
-    st.markdown('<div style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 15px;">Environmental factors affecting water needs</div>', unsafe_allow_html=True)
+    st.markdown('<div class="column-heading">🌤️ Weather Conditions</div>', unsafe_allow_html=True)
+    st.markdown('<div class="column-subtext">Environmental factors affecting water needs</div>', unsafe_allow_html=True)
     rainfall = st.slider("🌧️ Rainfall (mm)", 0, 300, 120, help="Average rainfall in your area")
     temperature = st.slider("🌡️ Temperature (°C)", 0, 50, 30, help="Average temperature")
     humidity = st.slider("💧 Humidity (%)", 0, 100, 70, help="Relative humidity percentage")
 
 with col2:
-    st.markdown("#### 🌱 Crop Information")
-    st.markdown('<div style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 15px;">Specify your agricultural setup</div>', unsafe_allow_html=True)
+    st.markdown('<div class="column-heading">🌱 Crop Information</div>', unsafe_allow_html=True)
+    st.markdown('<div class="column-subtext">Specify your agricultural setup</div>', unsafe_allow_html=True)
     crop_type = st.selectbox(
         "🌾 Crop Type", 
         ["rice", "wheat", "maize", "sugarcane", "cotton"],
         help="Select your primary crop"
     )
     soil_type = st.selectbox(
-        "🏔️ Soil Type", 
+        "🧱 Soil Type", 
         ["loam", "clay", "sandy", "silt"],
         help="Your soil composition"
     )
 
 with col3:
-    st.markdown("#### 📏 Field Specifications")
-    st.markdown('<div style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 15px;">Area and irrigation details</div>', unsafe_allow_html=True)
+    st.markdown('<div class="column-heading">📏 Field Specifications</div>', unsafe_allow_html=True)
+    st.markdown('<div class="column-subtext">Area and irrigation details</div>', unsafe_allow_html=True)
     acres = st.number_input(
         "🌾 Field Area (acres)", 
         min_value=0.1, 
@@ -437,52 +279,21 @@ with col3:
         step=0.1,
         help="Total cultivated area"
     )
-    
-    # Additional field for irrigation efficiency
     irrigation_efficiency = st.slider(
         "💦 Irrigation Efficiency (%)", 
         60, 95, 80,
         help="Efficiency of your irrigation system"
     )
 
-st.markdown('</div>', unsafe_allow_html=True)
-
-# Info Cards Section
-st.markdown("""
-    <div class="info-grid">
-        <div class="info-card">
-            <div class="info-icon">🎯</div>
-            <div class="info-title">Precise Predictions</div>
-            <div class="info-text">AI algorithms analyze multiple factors for accurate water requirements</div>
-        </div>
-        <div class="info-card">
-            <div class="info-icon">💰</div>
-            <div class="info-title">Cost Savings</div>
-            <div class="info-text">Optimize water usage and reduce irrigation costs by up to 30%</div>
-        </div>
-        <div class="info-card">
-            <div class="info-icon">🌱</div>
-            <div class="info-title">Better Yields</div>
-            <div class="info-text">Proper water management leads to healthier crops and higher productivity</div>
-        </div>
-        <div class="info-card">
-            <div class="info-icon">🌍</div>
-            <div class="info-title">Eco-Friendly</div>
-            <div class="info-text">Sustainable farming practices for environmental conservation</div>
-        </div>
-    </div>
-""", unsafe_allow_html=True)
-
-
-# Center the button using Streamlit columns
-# This ensures the button is always centered on all screen sizes
-button_col1, button_col2, button_col3 = st.columns([12,10,10])
+# Centered Predict Button
+button_col1, button_col2, button_col3 = st.columns([1, 2, 1])
 with button_col2:
     predict_clicked = st.button("🔮 Calculate Water Requirement", key="predict_btn")
 
 if predict_clicked:
     prediction = None
-    # 1. Attempt Flask REST API (when running locally)
+    
+    # 1. Attempt local Flask REST API if running
     try:
         url = "http://127.0.0.1:5000/predict"
         data = {
@@ -499,7 +310,7 @@ if predict_clicked:
     except Exception:
         pass
 
-    # 2. Resilient Cloud Standalone ML Inference (Zero-downtime, exact Linear Regression weights)
+    # 2. Resilient Cloud Standalone ML Inference (Exact Linear Regression Coefficients)
     if prediction is None:
         try:
             intercept = -17.648457424334026
@@ -527,71 +338,68 @@ if predict_clicked:
             )
             prediction = round(float(calc_val), 2)
         except Exception as err:
-            st.error(f"Inference computation error: {err}")
+            st.error(f"Inference error: {err}")
 
     if prediction is not None:
         # Adjust prediction based on irrigation efficiency
         adjusted_prediction = round(prediction * (100 / irrigation_efficiency), 2)
         water_saved = round(adjusted_prediction - prediction, 2)
         
-        # Display results
+        # Main Result Callout
         st.markdown(f"""
             <div class="result-card">
                 <div class="result-label">💧 Recommended Water Requirement</div>
                 <div class="result-value">{adjusted_prediction:,} L</div>
-                <div class="result-subtitle">For {acres} acres of {crop_type.title()}</div>
+                <div class="result-subtitle">For {acres} acres of {crop_type.title()} with {irrigation_efficiency}% efficiency</div>
             </div>
         """, unsafe_allow_html=True)
         
-        # Additional insights
-        col1, col2, col3 = st.columns(3)
-        with col1:
+        # 3 Key Metrics
+        m1, m2, m3 = st.columns(3)
+        with m1:
             st.metric(
                 label="📈 Base Requirement",
                 value=f"{prediction:,} L",
-                help="Raw AI prediction"
+                help="Raw Linear Regression ML prediction"
             )
-        with col2:
+        with m2:
             st.metric(
                 label="⚡ Efficiency Adjusted",
                 value=f"{adjusted_prediction:,} L",
                 delta=f"+{water_saved} L",
-                help="Adjusted for irrigation efficiency"
+                help="Adjusted for field irrigation efficiency"
             )
-        with col3:
+        with m3:
             daily_req = round(adjusted_prediction / 7, 2)
             st.metric(
                 label="📅 Daily Average",
                 value=f"{daily_req:,} L",
-                help="Estimated daily water need"
+                help="Estimated daily irrigation demand"
             )
             
-        # Recommendations
-        st.markdown("### 💡 Smart Recommendations")
+        # Agronomic Recommendations
+        st.markdown('<div class="rec-heading">💡 Smart Agronomic Recommendations</div>', unsafe_allow_html=True)
         recommendations = []
         if humidity < 50:
-            recommendations.append("🌡️ Low humidity detected - consider mulching to reduce water evaporation")
+            recommendations.append("🌡️ **Low humidity detected**: Apply organic mulching to suppress soil water evaporation.")
         if temperature > 35:
-            recommendations.append("🔥 High temperature - increase irrigation frequency during cooler hours")
+            recommendations.append("🔥 **High temperature advisory**: Shift irrigation cycles to early morning or late evening.")
         if rainfall > 200:
-            recommendations.append("🌧️ High rainfall expected - reduce irrigation schedule accordingly")
-        if soil_type == "sandy":
-            recommendations.append("🏖️ Sandy soil drains quickly - consider more frequent, smaller irrigations")
+            recommendations.append("🌧️ **Heavy rainfall expected**: Postpone automated irrigation to avoid soil waterlogging.")
+        if soil_type.lower() == "sandy":
+            recommendations.append("🏖️ **Sandy soil composition**: High percolation rate — distribute water in smaller, frequent intervals.")
         if irrigation_efficiency < 75:
-            recommendations.append("💧 Consider upgrading to drip irrigation for better water efficiency")
+            recommendations.append("💧 **Low irrigation efficiency**: Upgrade to localized drip irrigation to conserve up to 35% water.")
             
         if recommendations:
             for rec in recommendations:
                 st.info(rec)
         else:
-            st.success("✅ Your current parameters look optimal for efficient water usage!")
-
+            st.success("✅ Environmental and crop parameters are optimal for balanced irrigation!")
 
 # Footer
 st.markdown("""
-    <div style="text-align: center; margin-top: 50px; padding: 20px; color: #94a3b8; border-top: 1px solid rgba(71, 85, 105, 0.3);">
-        <p>🌱 Built with ❤️ for sustainable agriculture • Powered by AI & Machine Learning</p>
+    <div style="text-align: center; margin-top: 55px; padding: 25px; color: #94a3b8; border-top: 1px solid rgba(71, 85, 105, 0.3);">
+        <p>🌱 <strong>AquaPredict Pro</strong> • AI-Powered Sustainable Precision Agriculture</p>
     </div>
 """, unsafe_allow_html=True)
-
-st.markdown('</div>', unsafe_allow_html=True)  # Close main container
